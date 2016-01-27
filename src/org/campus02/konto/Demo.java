@@ -1,5 +1,9 @@
 package org.campus02.konto;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Demo {
 
 	public static void main(String[] args) {
@@ -24,13 +28,29 @@ public class Demo {
 		emp4.auszahlen(200);
 		System.out.println("emp4 " + emp4.kontostand);
 		
-		Konto emp5 = emp3;
+		Konto k1 = new Konto("Dominik");
+		GiroKonto k2 = new GiroKonto("Dominik", 1000);
+		JugendGiroKonto k3 = new JugendGiroKonto("Dominik", 1000, 100);
 		
-		emp5 = (GiroKonto) emp3;
-		emp5.einzahlen(100);
-		emp5.auszahlen(150);
-		System.out.println(emp5.kontostand);
+		ArrayList<Konto> list = new ArrayList<>();
+		list.add(k1);
+		list.add(k2);
+		list.add(k3);
+		list.add(emp1);
+		list.add(emp2);
+		list.add(emp3);
+		list.add(emp4);
 		
+		HashMap<String, Integer> map = new HashMap<>();
+		
+		for (Konto konto : list) {
+			if(!map.containsKey(konto.inhaber)) {
+				map.put(konto.inhaber, 1);
+			}
+			else {
+				int value = map.get(konto.inhaber);
+				map.put(konto.inhaber, value + 1);
+			}
+		}	
 	}
-
 }
